@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>故事页面</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .page {
+            display: none;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #333;
+        }
+
+        p {
+            font-size: 1.2em;
+            color: #666;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin: 20px 0;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="page1" class="page active">
+        <h1>故事开始</h1>
+        <img src="image1.jpg" alt="故事插图">
+        <p>从前，有一个小村庄...</p>
+        <a href="#page2" class="button">下一页</a>
+    </div>
+    <div id="page2" class="page">
+        <h1>故事发展</h1>
+        <img src="image2.jpg" alt="故事插图">
+        <p>村庄里住着一位勇敢的少年...</p>
+        <a href="#page1" class="button">上一页</a>
+        <a href="#page3" class="button">下一页</a>
+    </div>
+    <div id="page3" class="page">
+        <h1>故事结尾</h1>
+        <img src="image3.jpg" alt="故事插图">
+        <p>少年最终战胜了困难，村庄恢复了和平...</p>
+        <a href="#page2" class="button">上一页</a>
+    </div>
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                // 移除当前活动页面的 active 类
+                document.querySelector('.page.active').classList.remove('active');
+                // 获取目标页面的 ID
+                const targetId = this.getAttribute('href').substring(1);
+                // 为目标页面添加 active 类
+                document.getElementById(targetId).classList.add('active');
+                // 平滑滚动到目标元素
+                document.getElementById(targetId).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
